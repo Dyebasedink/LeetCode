@@ -8,13 +8,13 @@
 
 class Solution:
     def removeElements(self, head: ListNode, val: int) -> ListNode:
-        if head.next is None:
-            return None
-        slow = head
-        fast = head.next
-        while fast.next:
-            if slow.next.val == val:
-                slow.next = fast
-                slow = slow.next
-                fast = fast.next
-        return head
+        sentinel = ListNode(0)
+        sentinel.next = head    
+        prev, curr = sentinel, head
+        while curr:
+            if curr.val == val:
+                prev.next = curr.next
+            else:
+                prev = curr
+            curr = curr.next
+        return sentinel.next
